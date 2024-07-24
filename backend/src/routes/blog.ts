@@ -26,13 +26,13 @@ blogRouter.use("/*", async (c, next) => {
             c.status(403);
             return c.json({
                 message: "You are not logged in"
-            })
+            });
         }
     } catch(e) {
         c.status(403);
         return c.json({
             message: "You are not logged in"
-        })
+        });
     }
 });
 
@@ -43,7 +43,7 @@ blogRouter.post('/', async (c) => {
         c.status(411);
         return c.json({
             message: "Inputs not correct"
-        })
+        });
     }
 
     const authorId = c.get("userId");
@@ -71,7 +71,7 @@ blogRouter.put('/', async (c) => {
         c.status(411);
         return c.json({
             message: "Inputs not correct"
-        })
+        });
     }
 
     const prisma = new PrismaClient({
@@ -93,11 +93,38 @@ blogRouter.put('/', async (c) => {
     })
 })
 
-// Todo: add pagination
+// New route to get blogs by the currently logged-in user
+blogRouter.get('/user', async (c) => {
+    const userId = c.get("userId");
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+
+    const blogs = await prisma.blog.findMany({
+        where: {
+            authorId: Number(userId)
+        },
+        select: {
+            content: true,
+            title: true,
+            id: true,
+            author: {
+                select: {
+                    name: true
+                }
+            }
+        }
+    });
+
+    return c.json({
+        blogs
+    });
+})
+
 blogRouter.get('/bulk', async (c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate())
+    }).$extends(withAccelerate());
     const blogs = await prisma.blog.findMany({
         select: {
             content: true,
@@ -113,7 +140,7 @@ blogRouter.get('/bulk', async (c) => {
 
     return c.json({
         blogs
-    })
+    });
 })
 
 blogRouter.get('/:id', async (c) => {

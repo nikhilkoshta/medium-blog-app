@@ -6,6 +6,7 @@ import { Blogs } from "./pages/Blogs";
 import { Publish } from './pages/Publish';
 import Homepage from './pages/Home';
 import AboutPage from './pages/About';
+import { Dashboard } from './pages/Dashboard';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/blog/:id" element={<Blog />} />

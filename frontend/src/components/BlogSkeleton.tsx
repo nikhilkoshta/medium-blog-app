@@ -1,29 +1,30 @@
-import { Circle } from "./BlogCard"
+// src/components/BlogSkeleton.tsx
+import React from 'react';
 
-export const BlogSkeleton = () => {
-    return <div role="status" className="animate-pulse">
-        <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-screen-md cursor-pointer">
-            <div className="flex">
-                <div className="h-4 w-4 bg-gray-200 rounded-full w-48 mb-4"></div>
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                <div className="flex justify-center flex-col pl-2 flex justify-center flex-col">
-                    <Circle />
-                </div>
-                <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
-                    <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                </div>
-            </div>
-            <div className="text-xl font-semibold pt-2">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-            </div>
-            <div className="text-md font-thin">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-            </div>
-            <div className="text-slate-500 text-sm font-thin pt-4">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-            </div>
+export const BlogSkeleton: React.FC = () => {
+  return (
+    <div role="status" className="animate-pulse">
+      <div className="p-4 border-b border-slate-200 pb-4 w-full max-w-screen-md mx-auto cursor-pointer">
+        <div className="flex items-center space-x-4">
+          <div className="h-10 w-10 bg-gray-200 rounded-full"></div>
+          <div className="flex-1 space-y-2">
+            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
         </div>
-    <span className="sr-only">Loading...</span>
-</div>
-}
+        <div className="mt-4 space-y-2">
+          <div className="h-6 bg-gray-200 rounded"></div>
+          <div className="h-6 bg-gray-200 rounded w-5/6"></div>
+          <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+        </div>
+        <div className="mt-4 space-y-2">
+          <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+          <div className="h-4 bg-gray-200 rounded w-1/3"></div>
+        </div>
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  );
+};
+
+export default BlogSkeleton;
